@@ -10,6 +10,7 @@ public class Student {
     private int yearGrade;
     private int id = 1000;
     private String generatedID;
+    private int courseCost = 600;
     //Constructor
     public Student() {
 
@@ -31,11 +32,44 @@ public class Student {
         this.generatedID = getStudentID();
 
         System.out.println("The details are :\nFirst name: " + firstName + "\nLast name: " + lastName + "\nThe ID : " + generatedID);
+
+        //calling the enroll courses methode
     }
 
     //Generate the ID with the formula (5-digits with first number is the grade level "G-XXXX")
     public String getStudentID () {
         id++;
         return yearGrade + "-" + id;
+    }
+
+    //Enroll the courses
+    public String enrollCourse () {
+        int nbrOfCourses;
+        String choiceConfirmation = "";
+        ArrayList<String> coursesList = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Enter number of courses you want on the list bellow :\n1 - History101.\n2 - Mathematics101.\n3 - English101.\n4 - Chemistry101.\n5 - Computer Science101.");
+            nbrOfCourses = scanner.nextInt();
+            if (nbrOfCourses == 0){
+                System.out.println("Sorry! you entered number " + nbrOfCourses + " !");
+            } else if (nbrOfCourses == 1) {
+                System.out.println("Your desire to enroll " + nbrOfCourses + " course! If you want to change the number of courses press C if you want to keep your choice press Y.");
+                choiceConfirmation = scanner.nextLine();
+            } else {
+                do {
+                System.out.println("Your desire to enroll " + nbrOfCourses + " courses! If you want to change the number of courses press C if you want to keep your choice press Y.");
+                choiceConfirmation = scanner.nextLine();
+            } while (!choiceConfirmation.equals("y"));
+        }
+
+        for (int i = 0; i < nbrOfCourses; i++){
+            System.out.println("Enter the course n° " + (i + 1) + " to enroll." );
+            String courses = scanner.nextLine();
+            coursesList.add(courses);
+            courseCost += 600;
+
+        }
+        return "You chose " + nbrOfCourses + " as enroll course(s).\nThe courses are :\n" + coursesList + "\nThe cost of courses to pay is : $" + courseCost;
     }
 }
